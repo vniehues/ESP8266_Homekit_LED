@@ -1,0 +1,14 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "window.zoomLevel": -1,
+    "workbench.colorTheme": "Visual Studio 2019 Dark",
+    "workbench.iconTheme": "material-icon-theme",
+    "arduino.path": "C:\\Program Files (x86)\\Arduino",
+    "arduino.ignoreBoards": [
+    
+    ],
+    "arduino.additionalUrls": "https://dl.espressif.com/dl/package_esp32_index.json,http://arduino.esp8266.com/stable/package_esp8266com_index.json",
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": false,
+    "C_Cpp.default.browse.path": [],
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+}

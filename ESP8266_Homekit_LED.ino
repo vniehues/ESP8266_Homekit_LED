@@ -23,6 +23,7 @@
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
 #include <EEPROM.h>
+#include <DNSServer.h>
 #include "FastLED_RGBW.h"
 
 // FastLED
