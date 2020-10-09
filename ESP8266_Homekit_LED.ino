@@ -1,18 +1,6 @@
 /*
- * Example05_WS2812_Neopixel.ino
- *
  *  Created on: 2020-10-08
  *      Author: Vincent Niehues
- *	Thanks to all the other helpful people commenting here.
- *
- * This example allows to change brightness and color of a connected FastLED (SK6812) strip/matrix
- *
- * You should:
- * 1. read and use the Example01_TemperatureSensor with detailed comments
- *    to know the basic concept and usage of this library before other examples。
- * 2. erase the full flash or call homekit_storage_reset() in setup()
- *    to remove the previous HomeKit pairing storage and
- *    enable the pairing with the new accessory of this new HomeKit example.
  */
 
 
@@ -39,23 +27,23 @@ CRGBW leds[NUM_LEDS];
 CRGB *ledsRGB = (CRGB *) &leds[0];
 
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
+CRGBPalette16 currentPalette;
+TBlendType    currentBlending;
 
+float current_brightness_mapped =  100.0;
+
+bool rainbow_on = false;
+bool is_on = false;
 
 bool received_sat = false;
 bool received_hue = false;
 
-bool rainbow_on = false;
-
-bool is_on = false;
-float current_brightness_mapped =  100.0;
 float current_brightness =  255.0;
 float current_sat = 0.0;
 float current_hue = 0.0;
+
 int rgb_colors[3];
 int rgbw_colors[4];
-
-CRGBPalette16 currentPalette;
-TBlendType    currentBlending;
 
 const IPAddress apIP(192, 168, 1, 1);
 const char* apSSID = "Nice_Lamp_Setup";
@@ -70,6 +58,10 @@ void setup() {
   Serial.begin(115200);
   
   EEPROM.begin(512);
+
+  // comment this in if anything does not work.
+  // this will reset all WiFi and HomeKit information.
+  // Reset();
   
   delay(500);
 
@@ -125,10 +117,6 @@ extern "C" homekit_characteristic_t cha_rainbow_on;
 static uint32_t next_heap_millis = 0;
 
 void my_homekit_setup() {
-
-  // Comment in, when pairing fails
-  // homekit_storage_reset();
-
   cha_on.setter = set_on;
   cha_bright.setter = set_bright;
   cha_sat.setter = set_sat;
@@ -155,24 +143,51 @@ void loop() {
   }
 }
 
+void Reset()
+{
+  // initialize the LED pin as an output.
+  pinMode(13, OUTPUT);
+
+  // turn the LED on when we're starting
+  digitalWrite(13, HIGH);
+
+  // reset 
+  homekit_storage_reset();
+
+  for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);
+  }
+  // turn the LED off when we're done
+  digitalWrite(13, LOW);
+}
+
 void Run_Additionals()
 {
-  if(rainbow_on)
+  if (is_on)
   {
-    static uint8_t startIndex = 0;
-    startIndex++;
-    FillLedsWithColors(startIndex);
-    FastLED.setBrightness(current_brightness_mapped);
-    FastLED.show(); 
+    if(rainbow_on)
+    {
+      static uint8_t startIndex = 0;
+      startIndex = startIndex + 1; /* motion speed */
+      FillLedsWithColors(startIndex);
+      FastLED.setBrightness(current_brightness_mapped);
+      FastLED.show(); 
+    }
+  }
+  else
+  {
+      FastLED.setBrightness(0);
+      FastLED.clear();
+      FastLED.show();
   }
 }
 
 void FillLedsWithColors( uint8_t colorIndex)
 {
-    for( int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = ColorFromPalette(currentPalette, colorIndex, 255, currentBlending);
-        colorIndex++;
-    }
+  for ( int i = NUM_LEDS + 1; i > 0; i--) {
+    leds[i] = ColorFromPalette( currentPalette, colorIndex, 255, currentBlending);
+    colorIndex += 2;
+  }
 }
 
 void set_rainbow_on(const homekit_value_t v) {
@@ -183,7 +198,7 @@ void set_rainbow_on(const homekit_value_t v) {
 
     if(on) {
         Serial.println("Rainbow on");
-        currentPalette = RainbowStripeColors_p;         
+        currentPalette = RainbowColors_p;         
         currentBlending = LINEARBLEND;
     } else  {
         Serial.println("Rainbow off");
@@ -200,7 +215,6 @@ void set_on(const homekit_value_t v) {
         Serial.println("On");
     } else  {
         is_on = false;
-        set_rainbow_on(v);
         Serial.println("Off");
     }
 

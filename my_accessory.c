@@ -30,7 +30,7 @@ homekit_accessory_t *accessories[] = {
       // the bridged accessories must contain an INFORMATION service,
       // otherwise the HomeKit will reject to pair.
       HOMEKIT_SERVICE(ACCESSORY_INFORMATION, .characteristics=(homekit_characteristic_t*[]) {
-            HOMEKIT_CHARACTERISTIC(NAME, "Schreibtisch"),
+            HOMEKIT_CHARACTERISTIC(NAME, "Stehlampe"),
             HOMEKIT_CHARACTERISTIC(MANUFACTURER, "VNIEHUES"),
             HOMEKIT_CHARACTERISTIC(SERIAL_NUMBER, "181196"),
             HOMEKIT_CHARACTERISTIC(MODEL, "BIG_DICK_ENERGY"),
@@ -42,12 +42,12 @@ homekit_accessory_t *accessories[] = {
     }),
     HOMEKIT_ACCESSORY(.id=2, .category=homekit_accessory_category_lightbulb, .services=(homekit_service_t*[]) {
         HOMEKIT_SERVICE(ACCESSORY_INFORMATION, .characteristics=(homekit_characteristic_t*[]) {
-            HOMEKIT_CHARACTERISTIC(NAME, "Color Strip"),
+            HOMEKIT_CHARACTERISTIC(NAME, "LED"),
             HOMEKIT_CHARACTERISTIC(IDENTIFY, my_accessory_identify),
             NULL
         }),
         HOMEKIT_SERVICE(LIGHTBULB, .primary=true, .characteristics=(homekit_characteristic_t*[]) {
-          HOMEKIT_CHARACTERISTIC(NAME, "Color Strip"),
+          HOMEKIT_CHARACTERISTIC(NAME, "LED"),
             &cha_on,
             &cha_name,
             &cha_bright,
@@ -68,5 +68,5 @@ homekit_accessory_t *accessories[] = {
 homekit_server_config_t accessory_config = {
     .accessories = accessories,
     .password = "181-11-996",
-    .setupId = "LOLZ"
+    .setupId = "LULZ"
 };
