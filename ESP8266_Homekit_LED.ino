@@ -2,7 +2,17 @@
  *  Created on: 2020-10-08
  *      Author: Vincent Niehues
  */
-
+//static const uint8_t D0   = 16;
+//static const uint8_t D1   = 5;
+//static const uint8_t D2   = 4;
+//static const uint8_t D3   = 0;
+//static const uint8_t D4   = 2;
+//static const uint8_t D5   = 14;
+//static const uint8_t D6   = 12;
+//static const uint8_t D7   = 13;
+//static const uint8_t D8   = 15;
+//static const uint8_t D9   = 3;
+//static const uint8_t D10  = 1;
 
 #include <Arduino.h>
 #include <arduino_homekit_server.h>
@@ -57,13 +67,13 @@ void setup() {
 
   Serial.begin(115200);
   
-  EEPROM.begin(512);
+  EEPROM.begin(4000);
 
   // comment this in if anything does not work.
   // this will reset all WiFi and HomeKit information.
   // Reset();
   
-  delay(500);
+  delay(1000);
 
   // Read config from EEPROM
   if (restoreConfig()) {
@@ -146,10 +156,10 @@ void loop() {
 void Reset()
 {
   // initialize the LED pin as an output.
-  pinMode(13, OUTPUT);
+  pinMode(16, OUTPUT);
 
   // turn the LED on when we're starting
-  digitalWrite(13, HIGH);
+  digitalWrite(16, HIGH);
 
   // reset 
   homekit_storage_reset();
@@ -158,7 +168,7 @@ void Reset()
     EEPROM.write(i, 0);
   }
   // turn the LED off when we're done
-  digitalWrite(13, LOW);
+  digitalWrite(16, LOW);
 }
 
 void Run_Additionals()
@@ -184,7 +194,7 @@ void Run_Additionals()
 
 void FillLedsWithColors( uint8_t colorIndex)
 {
-  for ( int i = NUM_LEDS + 1; i > 0; i--) {
+  for ( int i = NUM_LEDS; i >= 0; i--) {
     leds[i] = ColorFromPalette( currentPalette, colorIndex, 255, currentBlending);
     colorIndex += 2;
   }
@@ -403,13 +413,13 @@ boolean restoreConfig() {
   Serial.println("Reading EEPROM...");
   String ssid = "";
   String pass = "";
-  if (EEPROM.read(364) != 0) {
-    for (int i = 364; i < 396; ++i) {
+  if (EEPROM.read(1464) != 0) {
+    for (int i = 3000; i < 3032; ++i) {
       ssid += char(EEPROM.read(i));
     }
     Serial.print("SSID: ");
     Serial.println(ssid);
-    for (int i = 396; i < 460; ++i) {
+    for (int i = 3032; i < 3096; ++i) {
       pass += char(EEPROM.read(i));
     }
     Serial.print("Password: ");
@@ -462,7 +472,7 @@ void startWebServer() {
       webServer.send(200, "text/html", makePage("Wi-Fi Settings", s));
     });
     webServer.on("/setap", []() {
-      for (int i = 364; i < 460; ++i) {
+      for (int i = 3000; i < 3100; ++i) {
         EEPROM.put(i, 0);
       }
       String ssid = urlDecode(webServer.arg("ssid"));
@@ -473,11 +483,11 @@ void startWebServer() {
       Serial.println(pass);
       Serial.println("Writing SSID to EEPROM...");
       for (int i = 0; i < ssid.length(); ++i) {
-        EEPROM.put(i+364, ssid[i]);
+        EEPROM.put(i+3000, ssid[i]);
       }
       Serial.println("Writing Password to EEPROM...");
       for (int i = 0; i < pass.length(); ++i) {
-        EEPROM.put(396 + i, pass[i]);
+        EEPROM.put(3032 + i, pass[i]);
       }
       EEPROM.commit();
       Serial.println("Write EEPROM done!");
@@ -500,7 +510,7 @@ void startWebServer() {
       webServer.send(200, "text/html", makePage("STA mode", s));
     });
     webServer.on("/reset", []() {
-      for (int i = 364; i < 460; ++i) {
+      for (int i = 3000; i < 3100; ++i) {
         EEPROM.write(i, 0);
       }
       EEPROM.commit();
