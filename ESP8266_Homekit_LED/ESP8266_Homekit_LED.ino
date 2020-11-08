@@ -14,6 +14,9 @@
 // static const uint8_t D9   = 3;
 // static const uint8_t D10  = 1;
 
+
+#define FASTLED_ESP8266_RAW_PIN_ORDER
+
 #include <Arduino.h>
 #include <arduino_homekit_server.h>
 #include <FastLED.h>
