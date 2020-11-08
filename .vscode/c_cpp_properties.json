@@ -4,6 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "C:\\Users\\vnieh\\Documents\\Arduino\\libraries\\**",
+                "C:\\Users\\vnieh\\Arduino\\**",
                 "C:\\Users\\vnieh\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                 "C:\\Users\\vnieh\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
                 "${workspaceFolder}/**"
@@ -12,6 +13,7 @@
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
                     "C:\\Users\\vnieh\\Documents\\Arduino\\libraries\\**",
+                    "C:\\Users\\vnieh\\Arduino\\**",
                     "C:\\Users\\vnieh\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                     "C:\\Users\\vnieh\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.4\\**",
                     "${workspaceFolder}/**"

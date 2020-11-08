@@ -3,7 +3,6 @@
     "window.zoomLevel": -1,
     "workbench.colorTheme": "Visual Studio 2019 Dark",
     "workbench.iconTheme": "material-icon-theme",
-    "arduino.path": "C:\\Program Files (x86)\\Arduino",
     "arduino.ignoreBoards": [
     
     ],
