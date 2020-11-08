@@ -3,6 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
+                "C:\\Users\\vnieh\\Documents\\Arduino\\libraries\\FastLED",
+                "C:\\Users\\vnieh\\Documents\\Arduino\\libraries\\HomeKit-ESP8266\\src",
                 "C:\\Users\\vnieh\\Documents\\Arduino\\libraries\\**",
                 "C:\\Users\\vnieh\\Arduino\\**",
                 "C:\\Users\\vnieh\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
