@@ -25,7 +25,7 @@
 #include "FastLED_RGBW.h"
 
 // FastLED
-#define LED_PIN     4
+#define LED_PIN     5
 #define NUM_LEDS    120
 #define BRIGHTNESS  255
 #define LED_TYPE    SK6812
@@ -121,7 +121,6 @@ extern "C" homekit_characteristic_t cha_bright;
 extern "C" homekit_characteristic_t cha_sat;
 extern "C" homekit_characteristic_t cha_hue;
 
-extern "C" homekit_characteristic_t cha_switch_on;
 extern "C" homekit_characteristic_t cha_rainbow_on;
 
 static uint32_t next_heap_millis = 0;
@@ -132,7 +131,6 @@ void my_homekit_setup() {
   cha_sat.setter = set_sat;
   cha_hue.setter = set_hue;
 
-  cha_switch_on.setter = set_rainbow_on;
   cha_rainbow_on.setter = set_rainbow_on;
   
 	arduino_homekit_setup(&accessory_config);
@@ -202,7 +200,6 @@ void FillLedsWithColors( uint8_t colorIndex)
 
 void set_rainbow_on(const homekit_value_t v) {
     bool on = v.bool_value;
-    cha_switch_on.value.bool_value = on; //sync the value
     cha_rainbow_on.value.bool_value = on; //sync the value
 
     rainbow_on = on;

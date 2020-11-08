@@ -19,7 +19,6 @@ homekit_characteristic_t cha_bright = HOMEKIT_CHARACTERISTIC_(BRIGHTNESS, 50);
 homekit_characteristic_t cha_sat = HOMEKIT_CHARACTERISTIC_(SATURATION, (float) 0);
 homekit_characteristic_t cha_hue = HOMEKIT_CHARACTERISTIC_(HUE, (float) 180);
 
-homekit_characteristic_t cha_switch_on = HOMEKIT_CHARACTERISTIC_(ON, false);
 homekit_characteristic_t cha_rainbow_on = HOMEKIT_CHARACTERISTIC_(ON, false);
 
 homekit_accessory_t *accessories[] = {
