@@ -2,17 +2,17 @@
  *  Created on: 2020-10-08
  *      Author: Vincent Niehues
  */
-//static const uint8_t D0   = 16;
-//static const uint8_t D1   = 5;
-//static const uint8_t D2   = 4;
-//static const uint8_t D3   = 0;
-//static const uint8_t D4   = 2;
-//static const uint8_t D5   = 14;
-//static const uint8_t D6   = 12;
-//static const uint8_t D7   = 13;
-//static const uint8_t D8   = 15;
-//static const uint8_t D9   = 3;
-//static const uint8_t D10  = 1;
+// static const uint8_t D0   = 16;
+// static const uint8_t D1   = 5;
+// static const uint8_t D2   = 4;
+// static const uint8_t D3   = 0;
+// static const uint8_t D4   = 2;
+// static const uint8_t D5   = 14;
+// static const uint8_t D6   = 12;
+// static const uint8_t D7   = 13;
+// static const uint8_t D8   = 15;
+// static const uint8_t D9   = 3;
+// static const uint8_t D10  = 1;
 
 #include <Arduino.h>
 #include <arduino_homekit_server.h>
@@ -25,7 +25,7 @@
 #include "FastLED_RGBW.h"
 
 // FastLED
-#define LED_PIN     5
+#define LED_PIN     4
 #define NUM_LEDS    120
 #define BRIGHTNESS  255
 #define LED_TYPE    SK6812
@@ -203,6 +203,7 @@ void FillLedsWithColors( uint8_t colorIndex)
 void set_rainbow_on(const homekit_value_t v) {
     bool on = v.bool_value;
     cha_switch_on.value.bool_value = on; //sync the value
+    cha_rainbow_on.value.bool_value = on; //sync the value
 
     rainbow_on = on;
 
