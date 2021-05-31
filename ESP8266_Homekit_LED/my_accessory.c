@@ -29,10 +29,10 @@ homekit_accessory_t *accessories[] = {
       // the bridged accessories must contain an INFORMATION service,
       // otherwise the HomeKit will reject to pair.
       HOMEKIT_SERVICE(ACCESSORY_INFORMATION, .characteristics=(homekit_characteristic_t*[]) {
-            HOMEKIT_CHARACTERISTIC(NAME, "Schreibtisch"),
+            HOMEKIT_CHARACTERISTIC(NAME, "LED-Lamp"),
             HOMEKIT_CHARACTERISTIC(MANUFACTURER, "VNIEHUES"),
             HOMEKIT_CHARACTERISTIC(SERIAL_NUMBER, "181196"),
-            HOMEKIT_CHARACTERISTIC(MODEL, "BIG_DICK_ENERGY"),
+            HOMEKIT_CHARACTERISTIC(MODEL, "Lamp 1"),
             HOMEKIT_CHARACTERISTIC(FIRMWARE_REVISION, "1.3.37"),
             HOMEKIT_CHARACTERISTIC(IDENTIFY, my_accessory_identify),
             NULL
@@ -67,5 +67,5 @@ homekit_accessory_t *accessories[] = {
 homekit_server_config_t accessory_config = {
     .accessories = accessories,
     .password = "181-11-996",
-    .setupId = "LELZ"
+    .setupId = "QQQQ"
 };

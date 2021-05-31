@@ -29,7 +29,7 @@
 
 // FastLED
 #define LED_PIN     5
-#define NUM_LEDS    120
+#define NUM_LEDS    140
 #define BRIGHTNESS  255
 #define LED_TYPE    SK6812
 #define COLOR_ORDER RGB
@@ -59,7 +59,7 @@ int rgb_colors[3];
 int rgbw_colors[4];
 
 const IPAddress apIP(192, 168, 1, 1);
-const char* apSSID = "Nice_Lamp_Setup";
+const char* apSSID = "Small_Lamp_Setup";
 boolean settingMode;
 String ssidList;
 
@@ -75,6 +75,7 @@ void setup() {
   // comment this in if anything does not work.
   // this will reset all WiFi and HomeKit information.
   // Reset();
+  // homekit_storage_reset();
   
   delay(1000);
 
@@ -95,6 +96,7 @@ void setup() {
       rgb_colors[0] = 255;
       rgb_colors[1] = 255;
       rgb_colors[2] = 255;
+
 
       rgbw_colors[0] = 0;
       rgbw_colors[1] = 0;
